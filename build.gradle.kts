@@ -2,7 +2,7 @@ plugins {
     kotlin("multiplatform") version "1.4.10"
     `maven-publish`
 }
-group = "cz.than"
+group = "com.brezinajn"
 version = "1.0-SNAPSHOT"
 
 repositories {

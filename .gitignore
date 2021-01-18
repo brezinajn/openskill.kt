@@ -8,3 +8,4 @@
 *.iws
 /tmp
 local.properties
+*.hprof

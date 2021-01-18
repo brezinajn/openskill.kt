@@ -4,7 +4,7 @@ plugins {
 }
 
 val projectVersion: String by project
-group = "com.brezinajn"
+group = "com.brezinajn.openskill"
 version = projectVersion
 
 repositories {

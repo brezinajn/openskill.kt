@@ -1,9 +1,11 @@
 plugins {
-    kotlin("multiplatform") version "1.4.10"
+    kotlin("multiplatform") version "1.4.21"
     `maven-publish`
 }
+
+val projectVersion: String by project
 group = "com.brezinajn"
-version = "1.0-SNAPSHOT"
+version = projectVersion
 
 repositories {
     mavenCentral()

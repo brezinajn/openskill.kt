@@ -4,7 +4,6 @@ import com.brezinajn.openskill.*
 import com.brezinajn.openskill.util.Getter
 import com.brezinajn.openskill.util.Setter
 import kotlin.math.exp
-import kotlin.math.sqrt
 
 
 interface PlacketLuce<TEAM, PLAYER> : Model<TEAM, PLAYER> {
@@ -23,7 +22,7 @@ interface PlacketLuce<TEAM, PLAYER> : Model<TEAM, PLAYER> {
                     Pair(mu, sigma)
                 }.transpose()
 
-            val gamma = sqrt(iSigmaSq) / c
+            val gamma = gamma(c, iSigmaSq)
             val iOmega = omegaSet.sum() * iSigmaSq / c
             val iDelta = gamma * deltaSet.sum() * iSigmaSq / c / c
 
@@ -44,11 +43,12 @@ interface PlacketLuce<TEAM, PLAYER> : Model<TEAM, PLAYER> {
             playersSetter: Setter<TEAM, List<PLAYER>>,
             playersGetter: Getter<TEAM, List<PLAYER>>,
             constants: Constants = Constants(),
+            gamma: (Double, Double) -> Double = ::gamma,
         ): PlacketLuce<TEAM, PLAYER> = object : PlacketLuce<TEAM, PLAYER>, Constants by constants {
             override val sigmaSetter = sigmaSetter
             override val muSetter = muSetter
             override val playersSetter = playersSetter
-
+            override val gamma = gamma
             override val TEAM.players: List<PLAYER>
                 get() = playersGetter(this)
             override val PLAYER.mu: Double

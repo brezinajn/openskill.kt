@@ -19,7 +19,7 @@ interface BradleyTerryFull<TEAM, PLAYER> : Model<TEAM, PLAYER> {
                     val ciq = sqrt(iSigmaSq + qSigmaSq + TWOBETASQ)
                     val piq = 1 / (1 + exp((qMu - iMu) / ciq))
                     val sigSqToCiq = iSigmaSq / ciq
-                    val gamma = sqrt(iSigmaSq) / ciq
+                    val gamma = gamma(ciq, iSigmaSq)
 
                     Pair(
                         omega + sigSqToCiq * (score(qRank, iRank) - piq),
@@ -43,12 +43,14 @@ interface BradleyTerryFull<TEAM, PLAYER> : Model<TEAM, PLAYER> {
             muGetter: Getter<PLAYER, Double>,
             playersSetter: Setter<TEAM, List<PLAYER>>,
             playersGetter: Getter<TEAM, List<PLAYER>>,
-            constants: Constants,
+            constants: Constants = Constants(),
+            gamma: (Double, Double) -> Double = ::gamma,
         ): BradleyTerryFull<TEAM, PLAYER> = object : BradleyTerryFull<TEAM, PLAYER>, Constants by constants {
             override val sigmaSetter = sigmaSetter
             override val muSetter = muSetter
             override val playersSetter = playersSetter
 
+            override val gamma: (Double, Double) -> Double = gamma
             override val TEAM.players: List<PLAYER>
                 get() = playersGetter(this)
             override val PLAYER.mu: Double

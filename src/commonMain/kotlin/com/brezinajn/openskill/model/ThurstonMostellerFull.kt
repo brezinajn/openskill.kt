@@ -15,7 +15,7 @@ interface ThurstonMostellerFull<TEAM, PLAYER> : Model<TEAM, PLAYER> {
                     val ciq = sqrt(iSigmaSq + qSigmaSq + TWOBETASQ)
                     val deltaMu = (iMu - qMu) / ciq
                     val sigSqToCiq = iSigmaSq / ciq
-                    val gamma = sqrt(iSigmaSq) / ciq
+                    val gamma = gamma(ciq, teamRatings.size.toDouble())
 
                     if (qRank == iRank)
                         Pair(
@@ -47,11 +47,13 @@ interface ThurstonMostellerFull<TEAM, PLAYER> : Model<TEAM, PLAYER> {
             playersSetter: Setter<TEAM, List<PLAYER>>,
             playersGetter: Getter<TEAM, List<PLAYER>>,
             constants: Constants,
+            gamma: (Double, Double) -> Double = { _, k -> 1 / k },
         ): ThurstonMostellerFull<TEAM, PLAYER> = object : ThurstonMostellerFull<TEAM, PLAYER>, Constants by constants {
             override val sigmaSetter = sigmaSetter
             override val muSetter = muSetter
             override val playersSetter = playersSetter
 
+            override val gamma: (Double, Double) -> Double = gamma
             override val TEAM.players: List<PLAYER>
                 get() = playersGetter(this)
             override val PLAYER.mu: Double

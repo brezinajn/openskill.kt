@@ -12,7 +12,7 @@ interface Model<TEAM, PLAYER> : TeamTC<TEAM, PLAYER>, Constants {
     val sigmaSetter: Setter<PLAYER, Double>
     val muSetter: Setter<PLAYER, Double>
     val playersSetter: Setter<TEAM, List<PLAYER>>
-
+    val gamma: (Double, Double) -> Double
 
     private fun PLAYER.setNewRating(iSigmaSq: Double, iOmega: Double, iDelta: Double): PLAYER =
         muSetter(this, mu + sigmaSq / iSigmaSq * iOmega)

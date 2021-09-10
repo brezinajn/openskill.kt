@@ -6,7 +6,7 @@ import kotlin.math.abs
 const val MIN_VALUE = EPSILON / 10
 
 
-private fun phiMajor(x: Double) = Gaussian.cdf(x)
+internal fun phiMajor(x: Double) = Gaussian.cdf(x)
 private fun phiMinor(x: Double) = Gaussian.pdf(x)
 
 internal fun v(x: Double, t: Double): Double {

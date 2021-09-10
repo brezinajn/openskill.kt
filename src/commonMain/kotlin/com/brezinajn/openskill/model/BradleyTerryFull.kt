@@ -1,5 +1,6 @@
 package com.brezinajn.openskill.model
 
+import com.brezinajn.openskill.Constants
 import com.brezinajn.openskill.teamRating
 import com.brezinajn.openskill.util.Getter
 import com.brezinajn.openskill.util.Setter
@@ -42,7 +43,8 @@ interface BradleyTerryFull<TEAM, PLAYER> : Model<TEAM, PLAYER> {
             muGetter: Getter<PLAYER, Double>,
             playersSetter: Setter<TEAM, List<PLAYER>>,
             playersGetter: Getter<TEAM, List<PLAYER>>,
-        ) = object : BradleyTerryFull<TEAM, PLAYER> {
+            constants: Constants,
+        ): BradleyTerryFull<TEAM, PLAYER> = object : BradleyTerryFull<TEAM, PLAYER>, Constants by constants {
             override val sigmaSetter = sigmaSetter
             override val muSetter = muSetter
             override val playersSetter = playersSetter

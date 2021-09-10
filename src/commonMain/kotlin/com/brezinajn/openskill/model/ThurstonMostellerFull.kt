@@ -46,7 +46,8 @@ interface ThurstonMostellerFull<TEAM, PLAYER> : Model<TEAM, PLAYER> {
             muGetter: Getter<PLAYER, Double>,
             playersSetter: Setter<TEAM, List<PLAYER>>,
             playersGetter: Getter<TEAM, List<PLAYER>>,
-        ) = object : ThurstonMostellerFull<TEAM, PLAYER> {
+            constants: Constants,
+        ): ThurstonMostellerFull<TEAM, PLAYER> = object : ThurstonMostellerFull<TEAM, PLAYER>, Constants by constants {
             override val sigmaSetter = sigmaSetter
             override val muSetter = muSetter
             override val playersSetter = playersSetter

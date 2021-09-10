@@ -1,5 +1,6 @@
 package com.brezinajn.openskill.model
 
-import com.brezinajn.openskill.BETA_SQ
+import com.brezinajn.openskill.Constants
 
-internal const val TWOBETASQ = 2 * BETA_SQ
+internal val Constants.TWOBETASQ
+    get() = 2 * BETA_SQ

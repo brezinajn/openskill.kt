@@ -11,7 +11,7 @@ private fun <T> sigmaSqSum(list: List<T>, sigmaGetter: Getter<T, Double>) = list
     acc + (sigma * sigma)
 }
 
-fun <T> winProbability(a: List<T>, b: List<T>, muGetter: Getter<T, Double>, sigmaGetter: Getter<T, Double>) =
+fun <T> Constants.winProbability(a: List<T>, b: List<T>, muGetter: Getter<T, Double>, sigmaGetter: Getter<T, Double>) =
     (meanSum(a, muGetter) - meanSum(b, muGetter)) / sqrt(
         (a.size + b.size) * BETA_SQ + sigmaSqSum(a, sigmaGetter) + sigmaSqSum(b, sigmaGetter)
     )

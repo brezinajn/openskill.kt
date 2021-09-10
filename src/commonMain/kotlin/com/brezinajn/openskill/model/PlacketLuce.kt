@@ -1,11 +1,8 @@
 package com.brezinajn.openskill.model
 
-import com.brezinajn.openskill.teamRating
+import com.brezinajn.openskill.*
 import com.brezinajn.openskill.util.Getter
 import com.brezinajn.openskill.util.Setter
-import com.brezinajn.openskill.utilA
-import com.brezinajn.openskill.utilC
-import com.brezinajn.openskill.utilSumQ
 import kotlin.math.exp
 import kotlin.math.sqrt
 
@@ -46,7 +43,8 @@ interface PlacketLuce<TEAM, PLAYER> : Model<TEAM, PLAYER> {
             muGetter: Getter<PLAYER, Double>,
             playersSetter: Setter<TEAM, List<PLAYER>>,
             playersGetter: Getter<TEAM, List<PLAYER>>,
-        ) = object : PlacketLuce<TEAM, PLAYER> {
+            constants: Constants = Constants(),
+        ): PlacketLuce<TEAM, PLAYER> = object : PlacketLuce<TEAM, PLAYER>, Constants by constants {
             override val sigmaSetter = sigmaSetter
             override val muSetter = muSetter
             override val playersSetter = playersSetter

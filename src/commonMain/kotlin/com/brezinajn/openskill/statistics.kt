@@ -3,19 +3,20 @@ package com.brezinajn.openskill
 import com.brezinajn.openskill.util.Gaussian
 import kotlin.math.abs
 
-const val MIN_VALUE = EPSILON / 10
+val Constants.MIN_VALUE
+    get() = EPSILON / 10
 
 
 internal fun phiMajor(x: Double) = Gaussian.cdf(x)
 private fun phiMinor(x: Double) = Gaussian.pdf(x)
 
-internal fun v(x: Double, t: Double): Double {
+internal fun Constants.v(x: Double, t: Double): Double {
     val xt = x - t
     val denom = phiMajor(xt)
     return if (denom < EPSILON) -xt else phiMinor(xt) / denom
 }
 
-internal fun w(x: Double, t: Double): Double {
+internal fun Constants.w(x: Double, t: Double): Double {
     val xt = x - t
     val denom = phiMajor(xt)
 
@@ -24,7 +25,7 @@ internal fun w(x: Double, t: Double): Double {
     } else v(x, t) * (v(x, t) + xt)
 }
 
-internal fun vt(x: Double, t: Double): Double {
+internal fun Constants.vt(x: Double, t: Double): Double {
     val xx = abs(x)
     val b = phiMajor(t - xx) - phiMajor(-t - xx)
     return if (b < MIN_VALUE) {
@@ -37,7 +38,7 @@ internal fun vt(x: Double, t: Double): Double {
     }
 }
 
-internal fun wt(x: Double, t: Double): Double {
+internal fun Constants.wt(x: Double, t: Double): Double {
     val xx = abs(x)
     val b = phiMajor(t - xx) - phiMajor(-t - xx)
     return if (b < MIN_VALUE) 1.0

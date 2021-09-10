@@ -20,13 +20,14 @@ internal data class TeamRating<TEAM>(
     val rank: Int
 )
 
-internal fun <TEAM> utilC(teamRatings: List<TeamRating<TEAM>>) = sqrt(teamRatings.sumOf { it.sigmaSq + BETA_SQ })
+internal fun <TEAM> Constants.utilC(teamRatings: List<TeamRating<TEAM>>) =
+    sqrt(teamRatings.sumOf { it.sigmaSq + BETA_SQ })
 
 
 internal fun <TEAM> utilSumQ(teamRatings: List<TeamRating<TEAM>>, c: Double): List<Double> =
     teamRatings.map { (_, _, _, qRank) ->
         teamRatings.filter { (_, _, _, iRank) -> iRank >= qRank }
-            .sumByDouble { (iMu, _, _, _) -> exp(iMu / c) }
+            .sumOf { (iMu, _, _, _) -> exp(iMu / c) }
     }
         .fold(mutableListOf(), ::intoRankHash)
 

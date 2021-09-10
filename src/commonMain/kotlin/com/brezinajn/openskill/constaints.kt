@@ -1,8 +1,30 @@
 package com.brezinajn.openskill
 
-const val Z = 3
-const val MU = 25.0
-const val SIGMA = MU / Z
-const val BETA = SIGMA / 2
-const val BETA_SQ = BETA * BETA
-internal const val EPSILON = 0.0001
+
+interface Constants {
+    val Z: Int
+    val MU: Double
+    val SIGMA: Double
+    val BETA: Double
+    val BETA_SQ: Double
+    val EPSILON: Double
+
+
+    companion object {
+        operator fun invoke(
+            Z: Int = 3,
+            MU: Double = 25.0,
+            SIGMA: Double = MU / Z,
+            BETA: Double = SIGMA / 2,
+            BETA_SQ: Double = BETA * BETA,
+            EPSILON: Double = 0.0001,
+        ) = object : Constants {
+            override val Z = Z
+            override val MU = MU
+            override val SIGMA = SIGMA
+            override val BETA = BETA
+            override val BETA_SQ = BETA_SQ
+            override val EPSILON = EPSILON
+        }
+    }
+}

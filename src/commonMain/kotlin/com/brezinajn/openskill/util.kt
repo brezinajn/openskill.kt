@@ -6,8 +6,8 @@ import kotlin.math.sqrt
 internal fun <TEAM, PLAYER> TeamTC<TEAM, PLAYER>.teamRating(teams: List<TEAM>): List<TeamRating<TEAM>> =
     teams.mapIndexed { index, team ->
         TeamRating(
-            mu = team.players.sumByDouble { it.mu },
-            sigmaSq = team.players.sumByDouble { it.sigmaSq },
+            mu = team.players.sumOf { it.mu },
+            sigmaSq = team.players.sumOf { it.sigmaSq },
             team = team,
             rank = index
         )
@@ -20,7 +20,7 @@ internal data class TeamRating<TEAM>(
     val rank: Int
 )
 
-internal fun <TEAM> utilC(teamRatings: List<TeamRating<TEAM>>) = sqrt(teamRatings.sumByDouble { it.sigmaSq + BETA_SQ })
+internal fun <TEAM> utilC(teamRatings: List<TeamRating<TEAM>>) = sqrt(teamRatings.sumOf { it.sigmaSq + BETA_SQ })
 
 
 internal fun <TEAM> utilSumQ(teamRatings: List<TeamRating<TEAM>>, c: Double): List<Double> =

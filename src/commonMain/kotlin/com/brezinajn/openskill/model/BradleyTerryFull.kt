@@ -1,6 +1,8 @@
 package com.brezinajn.openskill.model
 
 import com.brezinajn.openskill.teamRating
+import com.brezinajn.openskill.util.Getter
+import com.brezinajn.openskill.util.Setter
 import kotlin.math.exp
 import kotlin.math.sqrt
 
@@ -34,12 +36,12 @@ interface BradleyTerryFull<TEAM, PLAYER> : Model<TEAM, PLAYER> {
 
     companion object {
         operator fun <TEAM, PLAYER> invoke(
-            sigmaSetter: (PLAYER, Double) -> PLAYER,
-            sigmaGetter: (PLAYER) -> Double,
-            muSetter: (PLAYER, Double) -> PLAYER,
-            muGetter: (PLAYER) -> Double,
-            playersSetter: (TEAM, List<PLAYER>) -> TEAM,
-            playersGetter: (TEAM) -> List<PLAYER>,
+            sigmaSetter: Setter<PLAYER, Double>,
+            sigmaGetter: Getter<PLAYER, Double>,
+            muSetter: Setter<PLAYER, Double>,
+            muGetter: Getter<PLAYER, Double>,
+            playersSetter: Setter<TEAM, List<PLAYER>>,
+            playersGetter: Getter<TEAM, List<PLAYER>>,
         ) = object : BradleyTerryFull<TEAM, PLAYER> {
             override val sigmaSetter = sigmaSetter
             override val muSetter = muSetter

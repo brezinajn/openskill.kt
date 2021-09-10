@@ -2,15 +2,16 @@ package com.brezinajn.openskill.model
 
 import com.brezinajn.openskill.EPSILON
 import com.brezinajn.openskill.TeamTC
+import com.brezinajn.openskill.util.Setter
 import kotlin.math.max
 import kotlin.math.sqrt
 
 
 interface Model<TEAM, PLAYER> : TeamTC<TEAM, PLAYER> {
 
-    val sigmaSetter: (PLAYER, Double) -> PLAYER
-    val muSetter: (PLAYER, Double) -> PLAYER
-    val playersSetter: (TEAM, List<PLAYER>) -> TEAM
+    val sigmaSetter: Setter<PLAYER, Double>
+    val muSetter: Setter<PLAYER, Double>
+    val playersSetter: Setter<TEAM, List<PLAYER>>
 
 
     private fun PLAYER.setNewRating(iSigmaSq: Double, iOmega: Double, iDelta: Double): PLAYER =

@@ -1,6 +1,8 @@
 package com.brezinajn.openskill.model
 
 import com.brezinajn.openskill.teamRating
+import com.brezinajn.openskill.util.Getter
+import com.brezinajn.openskill.util.Setter
 import com.brezinajn.openskill.utilA
 import com.brezinajn.openskill.utilC
 import com.brezinajn.openskill.utilSumQ
@@ -38,12 +40,12 @@ interface PlacketLuce<TEAM, PLAYER> : Model<TEAM, PLAYER> {
 
     companion object {
         operator fun <TEAM, PLAYER> invoke(
-            sigmaSetter: (PLAYER, Double) -> PLAYER,
-            sigmaGetter: (PLAYER) -> Double,
-            muSetter: (PLAYER, Double) -> PLAYER,
-            muGetter: (PLAYER) -> Double,
-            playersGetter: (TEAM) -> List<PLAYER>,
-            playersSetter: (TEAM, List<PLAYER>) -> TEAM
+            sigmaSetter: Setter<PLAYER, Double>,
+            sigmaGetter: Getter<PLAYER, Double>,
+            muSetter: Setter<PLAYER, Double>,
+            muGetter: Getter<PLAYER, Double>,
+            playersSetter: Setter<TEAM, List<PLAYER>>,
+            playersGetter: Getter<TEAM, List<PLAYER>>,
         ) = object : PlacketLuce<TEAM, PLAYER> {
             override val sigmaSetter = sigmaSetter
             override val muSetter = muSetter

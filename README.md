@@ -4,7 +4,7 @@ with your model out of the box!
 #### Getting started:
 
 * Add jitpack to you repositories: `https://jitpack.io`
-* Add as dependency `com.github.brezinajn:openskill:0.0.1`
+* Add as dependency `com.github.brezinajn:openskill.kt:0.0.1`
 
 #### Usage:
 

@@ -1,13 +1,13 @@
 package com.brezinajn.openskill.model
 
 import com.brezinajn.openskill.Constants
-import com.brezinajn.openskill.TeamTC
+import com.brezinajn.openskill.GameTC
 import com.brezinajn.openskill.util.Setter
 import kotlin.math.max
 import kotlin.math.sqrt
 
 
-interface Model<TEAM, PLAYER> : TeamTC<TEAM, PLAYER>, Constants {
+interface Model<TEAM, PLAYER> : GameTC<TEAM, PLAYER>, Constants {
 
     val sigmaSetter: Setter<PLAYER, Double>
     val muSetter: Setter<PLAYER, Double>

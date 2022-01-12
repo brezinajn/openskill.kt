@@ -1,5 +1,9 @@
 package com.brezinajn.openskill
 
+interface GameTC<TEAM, PLAYER> : TeamTC<TEAM, PLAYER> {
+    val List<TEAM>.rank: List<Int>
+}
+
 interface TeamTC<TEAM, PLAYER> : PlayerTC<PLAYER> {
     val TEAM.players: List<PLAYER>
 }

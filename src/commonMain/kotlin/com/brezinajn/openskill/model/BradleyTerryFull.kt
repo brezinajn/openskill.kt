@@ -43,6 +43,7 @@ interface BradleyTerryFull<TEAM, PLAYER> : Model<TEAM, PLAYER> {
             muGetter: Getter<PLAYER, Double>,
             playersSetter: Setter<TEAM, List<PLAYER>>,
             playersGetter: Getter<TEAM, List<PLAYER>>,
+            rankGetter: Getter<List<TEAM>, List<Int>> = Getter { it.indices.toList() },
             constants: Constants = Constants(),
             gamma: (Double, Double) -> Double = ::gamma,
         ): BradleyTerryFull<TEAM, PLAYER> = object : BradleyTerryFull<TEAM, PLAYER>, Constants by constants {
@@ -57,6 +58,8 @@ interface BradleyTerryFull<TEAM, PLAYER> : Model<TEAM, PLAYER> {
                 get() = muGetter(this)
             override val PLAYER.sigma: Double
                 get() = sigmaGetter(this)
+            override val List<TEAM>.rank: List<Int>
+                get() = rankGetter(this)
         }
     }
 }

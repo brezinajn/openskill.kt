@@ -42,6 +42,7 @@ interface PlacketLuce<TEAM, PLAYER> : Model<TEAM, PLAYER> {
             muGetter: Getter<PLAYER, Double>,
             playersSetter: Setter<TEAM, List<PLAYER>>,
             playersGetter: Getter<TEAM, List<PLAYER>>,
+            rankGetter: Getter<List<TEAM>, List<Int>> = Getter { it.indices.toList() },
             constants: Constants = Constants(),
             gamma: (Double, Double) -> Double = ::gamma,
         ): PlacketLuce<TEAM, PLAYER> = object : PlacketLuce<TEAM, PLAYER>, Constants by constants {
@@ -55,6 +56,8 @@ interface PlacketLuce<TEAM, PLAYER> : Model<TEAM, PLAYER> {
                 get() = muGetter(this)
             override val PLAYER.sigma: Double
                 get() = sigmaGetter(this)
+            override val List<TEAM>.rank: List<Int>
+                get() = rankGetter(this)
         }
     }
 }

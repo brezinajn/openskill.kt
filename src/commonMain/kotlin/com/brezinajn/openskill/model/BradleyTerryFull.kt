@@ -36,16 +36,16 @@ interface BradleyTerryFull<TEAM, PLAYER> : Model<TEAM, PLAYER> {
     }
 
     companion object {
-        operator fun <TEAM, PLAYER> invoke(
-            sigmaSetter: Setter<PLAYER, Double>,
-            sigmaGetter: Getter<PLAYER, Double>,
-            muSetter: Setter<PLAYER, Double>,
-            muGetter: Getter<PLAYER, Double>,
-            playersSetter: Setter<TEAM, List<PLAYER>>,
-            playersGetter: Getter<TEAM, List<PLAYER>>,
-            rankGetter: Getter<List<TEAM>, List<Int>> = Getter { it.indices.toList() },
+        inline operator fun <TEAM, PLAYER> invoke(
+            noinline sigmaSetter: Setter<PLAYER, Double>,
+            crossinline sigmaGetter: Getter<PLAYER, Double>,
+            noinline muSetter: Setter<PLAYER, Double>,
+            crossinline muGetter: Getter<PLAYER, Double>,
+            noinline playersSetter: Setter<TEAM, List<PLAYER>>,
+            crossinline playersGetter: Getter<TEAM, List<PLAYER>>,
+            crossinline rankGetter: Getter<List<TEAM>, List<Int>> = { it.indices.toList() },
             constants: Constants = Constants(),
-            gamma: (Double, Double) -> Double = ::gamma,
+            noinline gamma: (Double, Double) -> Double = ::gamma,
         ): BradleyTerryFull<TEAM, PLAYER> = object : BradleyTerryFull<TEAM, PLAYER>, Constants by constants {
             override val sigmaSetter = sigmaSetter
             override val muSetter = muSetter

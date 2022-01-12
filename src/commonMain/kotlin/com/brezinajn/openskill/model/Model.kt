@@ -3,6 +3,7 @@ package com.brezinajn.openskill.model
 import com.brezinajn.openskill.Constants
 import com.brezinajn.openskill.GameTC
 import com.brezinajn.openskill.util.Setter
+import com.brezinajn.openskill.winProbability
 import kotlin.math.max
 import kotlin.math.sqrt
 
@@ -30,3 +31,6 @@ interface Model<TEAM, PLAYER> : GameTC<TEAM, PLAYER>, Constants {
 
     operator fun invoke(game: List<TEAM>): List<TEAM>
 }
+
+fun <PLAYER> Model<*, PLAYER>.winProbability(a: List<PLAYER>, b: List<PLAYER>) =
+    winProbability(a, b, { it.mu }, { it.sigma })

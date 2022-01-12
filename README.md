@@ -1,6 +1,12 @@
-Kotlin multiplatform implementation of [this](https://github.com/philihp/openskill.js) great library, that can be used with your model out of the box!
+Kotlin multiplatform implementation of [this](https://github.com/philihp/openskill.js) great library, that can be used
+with your model out of the box!
 
-Usage:
+#### Getting started:
+
+Add jitpack to you repositories: `https://jitpack.io`
+Add as dependency `com.github.brezinajn:openskill:0.0.1`
+
+#### Usage:
 
 ```kotlin
 // Your player class

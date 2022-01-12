@@ -5,7 +5,7 @@ import com.brezinajn.openskill.util.Getter
 import com.brezinajn.openskill.util.Setter
 import kotlin.math.sqrt
 
-interface ThurstonMostellerFull<TEAM, PLAYER> : Model<TEAM, PLAYER> {
+interface ThurstoneMostellerFull<TEAM, PLAYER> : Model<TEAM, PLAYER> {
     override fun invoke(game: List<TEAM>): List<TEAM> {
         val teamRatings = teamRating(game)
 
@@ -48,18 +48,19 @@ interface ThurstonMostellerFull<TEAM, PLAYER> : Model<TEAM, PLAYER> {
             playersGetter: Getter<TEAM, List<PLAYER>>,
             constants: Constants,
             gamma: (Double, Double) -> Double = { _, k -> 1 / k },
-        ): ThurstonMostellerFull<TEAM, PLAYER> = object : ThurstonMostellerFull<TEAM, PLAYER>, Constants by constants {
-            override val sigmaSetter = sigmaSetter
-            override val muSetter = muSetter
-            override val playersSetter = playersSetter
+        ): ThurstoneMostellerFull<TEAM, PLAYER> =
+            object : ThurstoneMostellerFull<TEAM, PLAYER>, Constants by constants {
+                override val sigmaSetter = sigmaSetter
+                override val muSetter = muSetter
+                override val playersSetter = playersSetter
 
-            override val gamma: (Double, Double) -> Double = gamma
-            override val TEAM.players: List<PLAYER>
-                get() = playersGetter(this)
-            override val PLAYER.mu: Double
-                get() = muGetter(this)
-            override val PLAYER.sigma: Double
-                get() = sigmaGetter(this)
-        }
+                override val gamma: (Double, Double) -> Double = gamma
+                override val TEAM.players: List<PLAYER>
+                    get() = playersGetter(this)
+                override val PLAYER.mu: Double
+                    get() = muGetter(this)
+                override val PLAYER.sigma: Double
+                    get() = sigmaGetter(this)
+            }
     }
 }
